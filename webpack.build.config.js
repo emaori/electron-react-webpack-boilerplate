@@ -33,8 +33,24 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
         include: defaultInclude
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        loader: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: false
+            }
+          }
+        ]
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss']
   },
   target: 'electron-renderer',
   plugins: [
